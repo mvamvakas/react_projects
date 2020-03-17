@@ -30,7 +30,7 @@ const HelloWorldPage = () => {
   let val = helloWorldBot(selectedLang);
   return (
     <div className="main-page">
-      <Title titleText="HelloWorld" />
+      <Title titleText="Hello World" />
       <div className="content">
         <div className="page-description">
           Welcome to the hello world app, this app lets you select a programming
