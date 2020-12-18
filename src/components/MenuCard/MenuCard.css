@@ -1,0 +1,18 @@
+.menuCard {
+  width: 75px;
+  height: 25px;
+  box-shadow: 1px 7px 15px 5px #000000;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  opacity: 0.7;
+}
+
+.menuCard:hover {
+  background-color: #fdfd96;
+  cursor: pointer;
+  opacity: 1;
+}

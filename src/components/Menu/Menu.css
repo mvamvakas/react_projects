@@ -1,0 +1,45 @@
+.menu {
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 1px 7px 15px 5px #000000;
+  position: fixed;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: lightgrey;
+}
+
+.line {
+  border-bottom: 1px solid black;
+  margin-bottom: 15px;
+}
+
+.section {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border-radius: 8px;
+}
+
+.section:hover {
+  background-color: #fdfd96;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.highlighted {
+  background-color: #89e894;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

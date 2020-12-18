@@ -24,10 +24,8 @@ export const helloWorldBot = cmd => {
   }
   try {
     const returnStr = parser(str);
-    console.log(returnStr);
     return returnStr;
   } catch (e) {
-    console.log(e);
     return "Programming language not found, try using '/hello Help'";
   }
 };

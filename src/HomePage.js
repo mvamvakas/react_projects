@@ -1,72 +1,101 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import Title from "./components/Title";
+import Menu from "./components/Menu";
+import MenuCard from "./components/MenuCard";
+import Poultry from "./components/Poultry";
+import Pork from "./components/Pork";
+import Fish from "./components/Fish";
+import Vegetarian from "./components/Vegetarian";
+import Salad from "./components/Salad";
+import Bookmarks from "./components/Bookmarks";
 import "./index.css";
-import HelloWorldPage from "./pages/HelloWorldPage";
-import CalculatorPage from "./pages/CalculatorPage";
-import IconBox from "./components/IconBox";
-import helloWorldImage from "./images/helloWorld.PNG";
-import calculatorImage from "./images/Calculator.png";
-// This site has 3 pages, all of which are rendered
-// dynamically in the browser (not server rendered).
-//
-// Although the page does not ever refresh, notice how
-// React Router keeps the URL up to date as you navigate
-// through the site. This preserves the browser history,
-// making sure things like the back button and bookmarks
-// work properly.
+
+// const sectionsObject = {
+//   home: "Home",
+//   poultry: "Poultry",
+//   pork: "Pork",
+//   fish: "fish",
+//   vegetarian: "Vegetarian"
+// };
+const sections = [
+  "Home",
+  "Bookmarks",
+  "Poultry",
+  "Pork",
+  "Fish",
+  "Vegetarian",
+  "Salads"
+];
+const sectionsWithoutHome = ["Poultry", "Pork", "Fish", "Vegetarian", "Salads"];
 
 export default function BasicExample() {
   return (
-    <Router>
-      <div>
-        <div className="centered-horizontal-flex">
-          <IconBox route="/hello" imageSrc={helloWorldImage} />
-          <IconBox route="/calculator" imageSrc={calculatorImage} />
-        </div>
-
-        {/*
+    <div className="main-page">
+      {/*
           A <Switch> looks through all its children <Route>
           elements and renders the first one whose path
           matches the current URL. Use a <Switch> any time
           you have multiple routes, but you want only one
           of them to render at a time
         */}
-        <Switch>
-          <Route exact path="/hello">
-            <HelloWorldPage />
-          </Route>
-          <Route exact path="/calculator">
-            <CalculatorPage />
-          </Route>
-        </Switch>
+      <MainPage />
+    </div>
+  );
+}
+
+const MainPage = () => {
+  const [menuIsOpen, setMenuIsOpen] = useState(true);
+  const [menuSection, setMenuSection] = useState(sections[0]);
+
+  const changeMenuStatus = () => {
+    setMenuIsOpen(!menuIsOpen);
+  };
+  return (
+    <React.Fragment>
+      <Title
+        titleText="Economic Eats"
+        openCloseMenu={changeMenuStatus}
+        goToHome={() => setMenuSection(sections[0])}
+      />
+      {menuIsOpen && (
+        <Menu
+          array={sections}
+          sectionChange={setMenuSection}
+          currentPage={menuSection}
+        />
+      )}
+      <div className="mainSection">
+        {menuSection === "Home" && (
+          <React.Fragment>
+            <title>Home</title>
+            <div className="content">
+              Eating healthy can be very difficult, and even more difficult when
+              you're on a budget. As a student who tries to eat healthy, I know
+              just how expensive it can be. The goal of this website is to
+              provide people eating on a budget healthy, delicious, and
+              inexpensive meals. This website includes recipes featuring
+              Poultry, Pork, and Fish. As well as Vegetarian meals and delicious
+              Salads. The Recipes can be found through the menu off to the side
+              or by clicking the options below
+            </div>
+            <div className="menuCards">
+              {sectionsWithoutHome.map(title => (
+                <MenuCard
+                  key={title + "home"}
+                  title={title}
+                  sectionChange={setMenuSection}
+                />
+              ))}
+            </div>
+          </React.Fragment>
+        )}
+        {menuSection === "Bookmarks" && <Bookmarks />}
+        {menuSection === "Poultry" && <Poultry />}
+        {menuSection === "Pork" && <Pork />}
+        {menuSection === "Fish" && <Fish />}
+        {menuSection === "Vegetarian" && <Vegetarian />}
+        {menuSection === "Salads" && <Salad />}
       </div>
-    </Router>
+    </React.Fragment>
   );
-}
-
-// You can think of these components as "pages"
-// in your app.
-
-function Home() {
-  return (
-    <div className="tooltip">
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
+};

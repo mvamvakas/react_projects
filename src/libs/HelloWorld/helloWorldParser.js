@@ -1,4 +1,3 @@
-import fs from "fs";
 import { languages } from "./HelloWorldExamples.js";
 
 export const parser = language => {
